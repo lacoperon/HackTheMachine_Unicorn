@@ -1,3 +1,4 @@
+install.packages("readr")
 library(readr)
 
 # Imports data using readr

@@ -1,3 +1,11 @@
+install.packages(c("ddplyr",
+                   "ggplot2",
+                   "tidyr",
+                   "reshape2",
+                   "ggplot2",
+                   "Hmisc",
+                   "dtwclust"))
+
 library(ddplyr)
 library(ggplot2)
 library(tidyr)
