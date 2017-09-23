@@ -7,7 +7,6 @@
 
 library(ggplot2)
 library(dtwclust)
-library(imputets)
 library(dplyr)
 
 # Load series
@@ -29,20 +28,26 @@ classB_ship2_GTM$`PORT SHAFT TORQUE` <- NULL
 
 classB_ship2_GTM <- na.omit(classB_ship2_GTM) #huge assumption, maybe should input guess values
 
-B2GTMSample <- sample_n(classB_ship2_GTM, 100)
+B2GTMSample <- sample_n(classB_ship2_GTM, 10000)
+B2GTMSample$indicator <- NULL
+B2GTMSample$DateTime  <- NULL
 
+B2GTMSample <- na.omit(B2GTMSample)
+
+b2gtmz <- scale(B2GTMSample)
 # Using DTW with help of lower bounds and PAM centroids
-pc.dtwlb <- tsclust(classB_ship2_GTM, k = 6L, 
+clusterResult <- tsclust(b2gtmz, k = 5L,
                     distance = "dtw_lb", centroid = "pam", 
                     seed = 3247, trace = TRUE,
                     control = partitional_control(pam.precompute = FALSE),
                     args = tsclust_args(dist = list(window.size = 20L)))
-#> Repetition 1 for k = 20
-#> Iteration 1: Changes / Distsum = 100 / 3214.899
-#> Iteration 2: Changes / Distsum = 16 / 2684.667
-#> Iteration 3: Changes / Distsum = 7 / 2617.178
-#> Iteration 4: Changes / Distsum = 0 / 2611.894
-#> 
-#>  Elapsed time is 2.083 seconds.
 
-plot(pc.dtwlb)
+B2GTMSample$cluster <- clusterResult@cluster
+
+Cluster1 <- filter(B2GTMSample, cluster == 1)
+Cluster2 <- filter(B2GTMSample, cluster == 2)
+Cluster3 <- filter(B2GTMSample, cluster == 3)
+Cluster4 <- filter(B2GTMSample, cluster == 4)
+Cluster5 <- filter(B2GTMSample, cluster == 5)
+
+
