@@ -9,12 +9,7 @@ library(ggplot2)
 library(dtwclust)
 library(dplyr)
 
-# Load series
-data(uciCT)
-
-# Reinterpolate series to equal length and normalize
-series <- zscore(series)
-
+# Deletes data that are always (or seemingly always) null
 classB_ship2_GTM$`PCL PORT BCU POS` <- NULL
 classB_ship2_GTM$`PCL PORT PACC POS` <- NULL
 classB_ship2_GTM$`PCL PORT SCU POS` <- NULL
@@ -24,7 +19,7 @@ classB_ship2_GTM$`PORT PITCH COMMAND` <- NULL
 classB_ship2_GTM$`PORT SHAFT TORQUE` <- NULL
 
 # But, some data is missing values, so we try to interpolate the variables in the in between using
-# a linear model (but I don't -- to figure out later)
+# a linear model (but I don't -- to figure out later) - using tsinterp or something
 
 classB_ship2_GTM <- na.omit(classB_ship2_GTM) #huge assumption, maybe should input guess values
 
