@@ -25,6 +25,8 @@ classB_ship2_GTM$`PORT ACT SHAFT SPD` <- NULL
 classB_ship2_GTM$`PORT ACTUAL PITCH` <- NULL
 classB_ship2_GTM$`PORT PITCH COMMAND` <- NULL
 classB_ship2_GTM$`PORT SHAFT TORQUE` <- NULL
+classB_ship2_GTM$`ENG BIAS ADJUST` <- NULL
+classB_ship2_GTM$`FULL AHEAD ADJUST` <- NULL
 
 # But, some data is missing values, so we try to interpolate the variables in the in between using
 # a linear model (but I don't -- to figure out later) - using tsinterp or something
@@ -35,8 +37,10 @@ classB_ship2_GTM <- na.omit(classB_ship2_GTM) #huge assumption, maybe should inp
 B2GTM1A <- filter(classB_ship2_GTM, indicator == "GTM1A")
 B2GTM1B <- filter(classB_ship2_GTM, indicator == "GTM1B")
 
-B2GTMSampleA <- sample_n(B2GTM1A, 2000)
-B2GTMSampleB <- sample_n(B2GTM1B, 2000)
+# B2GTMSampleA <- sample_n(B2GTM1A, 1000)
+B2GTMSampleA <- B2GTM1A[1:1000,]
+# B2GTMSampleB <- sample_n(B2GTM1B, 1000)
+B2GTMSampleB <- B2GTM1B[1:1000,]
 B2GTMSampleA$indicator <- NULL
 B2GTMSampleB$indicator <- NULL
 B2GTMSampleA$DateTime  <- NULL
@@ -44,6 +48,7 @@ B2GTMSampleB$DateTime  <- NULL
 
 B2GTMSampleA <- na.omit(B2GTMSampleA)
 B2GTMSampleB <- na.omit(B2GTMSampleB)
+B2GTMSampleB$`FULL AHEAD ADJUST` <- NULL
 
 engineData_A <- scale(B2GTMSampleA)
 engineData_B <- scale(B2GTMSampleB)
