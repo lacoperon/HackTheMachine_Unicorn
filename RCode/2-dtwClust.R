@@ -64,21 +64,34 @@ clusterResultB <- tsclust(engineData_B, k = 5L,
 B2GTMSampleA$cluster <- clusterResultA@cluster
 B2GTMSampleB$cluster <- clusterResultB@cluster
 
+library(ggfortify)
 
-# 
-# C1A <- filter(B2GTMSampleA, cluster == 1)
-# C2A <- filter(B2GTMSampleA, cluster == 2)
-# C3A <- filter(B2GTMSampleA, cluster == 3)
-# C4A <- filter(B2GTMSampleA, cluster == 4)
-# C5A <- filter(B2GTMSampleA, cluster == 5)
-# 
-# C1B <- filter(B2GTMSampleA, cluster == 1)
-# C2B <- filter(B2GTMSampleA, cluster == 2)
-# C3B <- filter(B2GTMSampleA, cluster == 3)
-# C4B <- filter(B2GTMSampleA, cluster == 4)
-# C5B <- filter(B2GTMSampleA, cluster == 5)
+pcaEngineA <- prcomp(B2GTMSampleA)
+B2GTMSampleA$cluster <- as.factor(B2GTMSampleA$cluster)
+PCiA<-data.frame(pcaEngineA$x,Cluster=B2GTMSampleA$cluster)
+ggplot(PCiA,aes(x=PC1,y=PC2,col=Cluster))+
+  geom_point(size=1.5,alpha=0.8)+ #Size and alpha just for fun
+  scale_color_manual(values = c("red","blue","orange","green","hotpink"))+ #your colors here
+  theme_classic()
 
+pcaEngineB <- prcomp(B2GTMSampleB)
+B2GTMSampleB$cluster <- as.factor(B2GTMSampleB$cluster)
+PCiB<-data.frame(pcaEngineB$x,Cluster=B2GTMSampleB$cluster)
+ggplot(PCiB,aes(x=PC1,y=PC2,col=Cluster))+
+  geom_point(size=1.5,alpha=0.8)+ #Size and alpha just for fun
+  scale_color_manual(values = c("red","blue","orange","green","hotpink"))+ #your colors here
+  theme_classic()
 
+C1A <- filter(B2GTMSampleA, cluster == 1)
+C2A <- filter(B2GTMSampleA, cluster == 2)
+C3A <- filter(B2GTMSampleA, cluster == 3)
+C4A <- filter(B2GTMSampleA, cluster == 4)
+C5A <- filter(B2GTMSampleA, cluster == 5)
 
+C1B <- filter(B2GTMSampleA, cluster == 1)
+C2B <- filter(B2GTMSampleA, cluster == 2)
+C3B <- filter(B2GTMSampleA, cluster == 3)
+C4B <- filter(B2GTMSampleA, cluster == 4)
+C5B <- filter(B2GTMSampleA, cluster == 5)
 
 
