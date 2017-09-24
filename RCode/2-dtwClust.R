@@ -38,9 +38,9 @@ B2GTM1A <- filter(classB_ship2_GTM, indicator == "GTM1A")
 B2GTM1B <- filter(classB_ship2_GTM, indicator == "GTM1B")
 
 # B2GTMSampleA <- sample_n(B2GTM1A, 1000)
-B2GTMSampleA <- B2GTM1A[1:1000,]
+B2GTMSampleA <- B2GTM1A[1:10000,]
 # B2GTMSampleB <- sample_n(B2GTM1B, 1000)
-B2GTMSampleB <- B2GTM1B[1:1000,]
+B2GTMSampleB <- B2GTM1B[1:10000,]
 B2GTMSampleA$indicator <- NULL
 B2GTMSampleB$indicator <- NULL
 B2GTMSampleA$DateTime  <- NULL
