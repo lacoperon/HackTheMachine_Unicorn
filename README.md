@@ -1,6 +1,6 @@
 # HackTheMachine -- Team Unicorn
 
-Welcome to Team Unicorn's stab at [HacktheMachine 2017](hackthemachine.ai)'s Data Science and the Seven Seas challenge, in which we analyzed several US Navy ships' engine data over several years, from various engine components. Each engine component had >30 measures that were collected very frequently each day, going back those several years. 
+Welcome to Team Unicorn's stab at [HacktheMachine 2017](http://hackthemachine.ai)'s Data Science and the Seven Seas challenge, in which we analyzed several US Navy ships' engine data over several years, from various engine components. Each engine component had >30 measures that were collected very frequently each day, going back those several years. 
 
 The labels corresponding to when a ship's engines were (or weren't) operating at full capacity was (understandably) redacted, so we took a more novel approach.
 
